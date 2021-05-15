@@ -60,9 +60,7 @@ if(nargin < 2)
     threshold = graythresh(matrix(total*.5:end));
 end
 
-binarization = im2bw(adjustedImage,threshold);
-s = regionprops(binarization, 'centroid');
-centroids = cat(1,s.Centroid);
+binarization = imbinarize(adjustedImage,threshold);
 
 
 % open image and then detect edge using laplacian of gaussian
@@ -76,7 +74,7 @@ afterLoG = uint8(imfilter(double(afterOpening)*255,h,'same').*(sigma^2));
 se2 = strel('disk',5);
 afterOpening = imopen(binarization,se2);
 number_of_nuclei = bwconncomp(afterOpening);
-
+centroids = regionprops(number_of_nuclei, 'Centroid');
 
 % % you can either use watershed method to do segmentation
 % D = -bwdist(~afterOpening);

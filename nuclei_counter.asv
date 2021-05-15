@@ -60,9 +60,11 @@ if(nargin < 2)
     threshold = graythresh(matrix(total*.5:end));
 end
 
-binarization = im2bw(adjustedImage,threshold);
-s = regionprops(binarization, 'centroid');
-centroids = cat(1,s.Centroid);
+binarization = imbinarize(adjustedImage,threshold);
+
+centroids = regionprops(imbinarize(image), 'Centroid');
+%s = regionprops(binarization, 'centroid');
+%centroids = cat(1,s.Centroid);
 
 
 % open image and then detect edge using laplacian of gaussian
