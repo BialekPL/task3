@@ -1,3 +1,5 @@
+%Grupa Bereta, Białecki, Fatyga
+%% Task3A
 obraz1 = imread('dapi.tif');
 obraz_szary = rgb2gray(obraz1);
 [output_image, liczba_jader, binarna_maska, centroidy] = nuclei_counter(obraz_szary);
@@ -17,13 +19,17 @@ centroidy1 = cat(1, centroidy.Centroid);
 plot(centroidy1(:,1), centroidy1(:,2), 'w.');
 hold off
 
-
+%Wyświetlenie oryginału a na nim mapa gęstości
 centroidy2 = vertcat(centroidy.Centroid);
-
-[bandwidth,density,X,Y] = kde2d(centroidy2, 2^9);
+[bandwidth,density,X,Y] = kde2d(centroidy2);
 figure(3)
 imshow(obraz1);
 hold on;
 contour(X,Y,density,50);
 hold off;
+
+%% Task3B
+
+
+
 
